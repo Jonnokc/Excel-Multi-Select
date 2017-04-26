@@ -10,23 +10,17 @@ On Error GoTo exitHandler
 
 If rngDV Is Nothing Then GoTo exitHandler
 
-If Intersect(Target, rngDV) Is Nothing Then
-Else
-  Application.EnableEvents = False
-  newVal = Target.Value
-  Application.Undo
-  oldVal = Target.Value
-  Target.Value = newVal
-  If Target.Column = 1 Then
-    If oldVal = "" Then
-      Else
-      If newVal = "" Then
-      Else
-      Target.Value = oldVal _
-        & ", " & newVal
-      End If
+If Not Intersect(Target, rngDV) Is Nothing Then
+	Application.EnableEvents = False
+ 	newVal = Target.Value
+ 	Application.Undo
+ 	oldVal = Target.Value
+ 	Target.Value = newVal
+ 	If Target.Column = 1 Then
+		If oldVal <> "" And newVal <> ""  Then 
+      		Target.Value = oldVal & ", " & newVal
+      	End If
     End If
-  End If
 End If
 
 exitHandler:
